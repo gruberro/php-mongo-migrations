@@ -2,7 +2,7 @@
 
 namespace Gruberro\MongoDbMigrations;
 
-interface RunAlwaysMigrationInterface
+interface RunAlwaysMigrationInterface extends MigrationInterface
 {
 
 }

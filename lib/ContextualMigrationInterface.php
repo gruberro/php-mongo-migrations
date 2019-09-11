@@ -2,7 +2,7 @@
 
 namespace Gruberro\MongoDbMigrations;
 
-interface ContextualMigrationInterface
+interface ContextualMigrationInterface extends MigrationInterface
 {
     /**
      * Returns a list of context names
