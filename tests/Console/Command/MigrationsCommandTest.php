@@ -147,7 +147,7 @@ class MigrationsCommandTest extends MongoDbMigrations\Tests\TestCase
         $databaseMigrationsLockCollection->insertOne(['locked' => true, 'last_locked_date' => new MongoDB\BSON\UTCDatetime((new \DateTime())->getTimestamp() * 1000)]);
 
         $this->expectException(RunTimeException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/Concurrent migrations are not allowed/'
         );
 
@@ -169,7 +169,7 @@ class MigrationsCommandTest extends MongoDbMigrations\Tests\TestCase
     public function testExecuteWithInvalidMigrationDirectory()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/\'invalid\/dir\' is no valid directory/'
         );
 
@@ -199,7 +199,7 @@ class MigrationsCommandTest extends MongoDbMigrations\Tests\TestCase
     public function testExecuteWithDuplicatedMigrationIds()
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             "#Found a non unique migration id 'migration' in 'TestMigrations\\\\DuplicateMigrationIds\\\\Migration[A-B]', already defined by migration class 'TestMigrations\\\\DuplicateMigrationIds\\\\Migration[A-B]'#"
         );
 
@@ -229,7 +229,7 @@ class MigrationsCommandTest extends MongoDbMigrations\Tests\TestCase
     public function testExecuteWithFailingMigrations()
     {
         $this->expectException(RuntimeException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/Error while executing migrations/'
         );
 
@@ -282,7 +282,7 @@ class MigrationsCommandTest extends MongoDbMigrations\Tests\TestCase
     public function testExecuteAnEmptyContextSpecification()
     {
         $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/Error while executing migrations/'
         );
 
