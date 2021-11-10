@@ -166,7 +166,7 @@ class VersionsCommandTest extends MongoDbMigrations\Tests\TestCase
         $databaseMigrationsLockCollection->insertOne(['locked' => true, 'last_locked_date' => new MongoDB\BSON\UTCDatetime((new \DateTime())->getTimestamp() * 1000)]);
 
         $this->expectException(RunTimeException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/Concurrent migrations are not allowed/'
         );
 
@@ -188,7 +188,7 @@ class VersionsCommandTest extends MongoDbMigrations\Tests\TestCase
     public function testExecuteWithInvalidMigrationDirectory()
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessageRegExp(
+        $this->expectExceptionMessageMatches(
             '/\'invalid\/dir\' is no valid directory/'
         );
 
